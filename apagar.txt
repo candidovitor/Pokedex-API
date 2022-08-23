@@ -1,0 +1,36 @@
+regions_list = [
+    {
+        'region_id': '1',
+        'name': 'Kanto'
+    },
+    {
+        'region_id': '2',
+        'name': 'Johto'
+    },
+    {
+        'region_id': '3',
+        'name': 'Hoenn'
+    },
+    {
+        'region_id': '4',
+        'name': 'Sinnoh'
+    },
+    {
+        'region_id': '5',
+        'name': 'Unova'
+    },
+    {
+        'region_id': '6',
+        'name': 'Kalos'
+    },
+    {
+        'region_id': '7',
+        'name': 'Alola'
+    },
+    {
+        'region_id': '8',
+        'name': 'Galar'
+    }
+] 
+
+"region_name": "Kanto"
