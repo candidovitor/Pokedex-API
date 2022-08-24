@@ -16,3 +16,7 @@ class TypesModel(db.Model):
             'type_name': self.type_name
         }
 
+    @classmethod
+    def find_by_name(cls, type_name):
+        return cls.query.filter_by(type_name=type_name).first()
+

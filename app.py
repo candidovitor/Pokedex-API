@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Api 
 from resources.regions import Region, All_Regions
+from resources.types import Type
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -10,6 +11,7 @@ api = Api(app)
 api.add_resource(All_Regions, '/regions')
 api.add_resource(Region, '/region/<string:region_name>')
 
+api.add_resource(Type, '/type/<string:type_name>')
 
 @app.before_first_request
 def creat_database():
