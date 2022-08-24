@@ -34,3 +34,25 @@ regions_list = [
 ] 
 
 "region_name": "Kanto"
+"region_id": 1
+
+region = RegionModel.find_by_name(region_name)
+        
+        if region:
+            region = region.json()
+            return (
+                {"Message": f"An region with name '{region['region_name']}' already exists"}
+            )
+
+        
+         region = RegionModel(region_name)
+
+        query_db = db.session.query(RegionModel).filter_by(region_name=region_name).first()
+        print(query_db) 
+
+        try:
+            region.save_to_database()
+        except:
+            return {"message": "Erro"}
+        
+        return region.json(), 201

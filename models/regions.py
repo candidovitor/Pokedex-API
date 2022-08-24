@@ -6,32 +6,37 @@ class RegionModel(db.Model):
     region_id = db.Column(db.Integer, primary_key=True)
     region_name = db.Column(db.String(20))
 
-    def __init__(self,  region_name):
-        self.region_name = region_name
+    def __init__(self, region_id, region_name):
         self.region_id = region_id
+        self.region_name = region_name
 
     def json(self):
         return {
+            'region_id': self.region_id,
             'region_name': self.region_name,
-            'region_id': self.region_id
         }
     
     @classmethod
-    def find_by_id(cls, region_id):
-        region = cls.query.filter_by(region_id=region_id).first()
-        return region
-        
+    def find_by_name(cls, region_name):
+        return cls.query.filter_by(region_name=region_name).first()
 
     @classmethod
-    def find_by_name(cls, region_name):
-        region = cls.query.filter_by(region_name=region_name).first()
-        return region
+    def find_by_id(cls, region_id):
+        return cls.query.filter_by(region_id=region_id).first()
 
-    
+    @classmethod
     def find_all_regions(cls):
         return cls.query.all()
 
-    
-    def save_to_database(self):
+    def delete_region(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def update_region(self, region_id, region_name):
+        self.region_id = region_id
+        self.region_name = region_name
+
+
+    def save_to_db(self):
         db.session.add(self)
         db.session.commit()
