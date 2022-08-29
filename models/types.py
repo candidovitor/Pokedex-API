@@ -24,6 +24,10 @@ class TypesModel(db.Model):
         return cls.query.filter_by(type_name=type_name).first()
 
     @classmethod
+    def find_by_id(cls, type_id):
+        return cls.query.filter_by(type_id=type_id).first()
+
+    @classmethod
     def find_all_types(cls):
         return cls.query.all()
 

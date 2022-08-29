@@ -6,7 +6,7 @@ class AttackModel(db.Model):
     attack_id = db.Column(db.Integer, primary_key=True)
     attack_name = db.Column(db.String(50))
     damage = db.Column(db.Integer)
-    
+
     type_id = db.Column(db.Integer, db.ForeignKey('types_model.type_id'))
     #terá uma ou duas informações que sairão daqui para a tabela pokemon
 
@@ -38,14 +38,12 @@ class AttackModel(db.Model):
         self.type_id = type_id
 
     @classmethod
-    def find_attack_by_id(cls, attack_id):
+    def find_by_id(cls, attack_id):
         return cls.query.filter_by(attack_id=attack_id).first()
 
     @classmethod
     def find_all_attacks(cls):
         return cls.query.all()
 
-    @classmethod
-    def find_by_id(cls, attack_id):
-        return cls.query.filter_by(attack_id=attack_id).first()
+    
         

@@ -10,7 +10,7 @@ class AllAttacks(Resource):
 
 class Attack(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('attack_id', type=int, required=True, help="This field cannot be left blank")
+    #parser.add_argument('attack_id', type=int, required=True, help="This field cannot be left blank")
     parser.add_argument('attack_name', type=str, required=True)
     parser.add_argument('damage', type=int, required=True)
     parser.add_argument('type_id', type=float, required=True)
@@ -19,7 +19,7 @@ class Attack(Resource):
     def post(self, attack_id):
         print(attack_id)
         #print(attack_id)
-        attack = AttackModel.find_attack_by_id(attack_id)
+        attack = AttackModel.find_by_id(attack_id)
         if attack:
             return {"Message": "Id already in use"}, 404
 
@@ -51,7 +51,7 @@ class Attack(Resource):
 
     def get(self, attack_id):
 
-        attack = AttackModel.find_attack_by_id(attack_id)
+        attack = AttackModel.find_by_id(attack_id)
         if attack:
             return attack.json()
         else:
@@ -60,7 +60,7 @@ class Attack(Resource):
     def put(self, attack_id):
         try:
             data = Attack.parser.parse_args()
-            attack = AttackModel.find_attack_by_id(attack_id)
+            attack = AttackModel.find_by_id(attack_id)
             if attack:
                 new_attack_name = data['attack_name']
                 new_damage = data['damage']
@@ -75,16 +75,19 @@ class Attack(Resource):
 
 class Attack_by_type(Resource):
     def get(self, type_id):
-        print(attack_id)
+        #print(type_id)
 
         attacks = AttackModel.query.filter_by(type_id=type_id)
-        print(attacks)
-        """ try:
-            attack = AttackModel.query.filter_by(type_id=type_id)
-            type_ = TypesModel.filter_by(type_id)
-            type_ = type_.json()
-            type_name = type_['type_name']
         
-            return {type_name:[x.json() for x in attack]}
-        except:
-            return {'Message': f'An error occurred while to try filter all information {type_id}'}, 500 """
+        type_attack = TypesModel.find_by_id(type_id)
+        type_attack = type_attack.json()
+        print(type_attack)
+        type_name = type_attack['type_name']
+
+        type_attack = AttackModel.query.filter_by(type_id=type_id).first()
+
+        return {type_name: [x.json() for x in attacks]}
+
+        #return {f'attacks from' {type_name}: {[x.json() for x in attacks]}
+
+        

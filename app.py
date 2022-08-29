@@ -17,7 +17,7 @@ api.add_resource(Types, '/type/<string:type_name>')
 
 api.add_resource(AllAttacks, '/attacks')
 api.add_resource(Attack, '/attack/<int:attack_id>')
-api.add_resource(Attack_by_type, '/attack_by_type/<int:attack_id>')
+api.add_resource(Attack_by_type, '/attack_by_type/<int:type_id>')
 
 
 @app.before_first_request
