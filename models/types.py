@@ -6,6 +6,9 @@ class TypesModel(db.Model):
     type_id = db.Column(db.Integer, primary_key=True)
     type_name = db.Column(db.String(20))
 
+    type_attack = db.relationship("AttackModel", lazy="dynamic") 
+    #pokemon = db.relationship("PokemonModel", lazy="dynamic")
+    
     def __init__(self, type_id, type_name):
         self.type_id = type_id
         self.type_name = type_name
@@ -20,3 +23,19 @@ class TypesModel(db.Model):
     def find_by_name(cls, type_name):
         return cls.query.filter_by(type_name=type_name).first()
 
+    @classmethod
+    def find_all_types(cls):
+        return cls.query.all()
+
+    def delete_type(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def update_type(self, type_id, type_name):
+        self.type_id = type_id
+        self.type_name = type_name
+
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
