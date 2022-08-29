@@ -76,17 +76,19 @@ class Attack(Resource):
 class Attack_by_type(Resource):
     def get(self, type_id):
         #print(type_id)
+        try:
+            attacks = AttackModel.query.filter_by(type_id=type_id)
+            
+            type_attack = TypesModel.find_by_id(type_id)
+            type_attack = type_attack.json()
+            print(type_attack)
+            type_name = type_attack['type_name']
 
-        attacks = AttackModel.query.filter_by(type_id=type_id)
-        
-        type_attack = TypesModel.find_by_id(type_id)
-        type_attack = type_attack.json()
-        print(type_attack)
-        type_name = type_attack['type_name']
+            type_attack = AttackModel.query.filter_by(type_id=type_id).first()
 
-        type_attack = AttackModel.query.filter_by(type_id=type_id).first()
-
-        return {type_name: [x.json() for x in attacks]}
+            return {type_name: [x.json() for x in attacks]}
+        except:
+            return {'Message': 'An error occurred while to try filter all attacks by type {type_id}'}, 500
 
         #return {f'attacks from' {type_name}: {[x.json() for x in attacks]}
 
