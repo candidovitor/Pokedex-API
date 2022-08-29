@@ -3,6 +3,7 @@ from flask_restful import Api
 from resources.regions import Region, All_Regions
 from resources.types import Types, AllTypes
 from resources.attacks import Attack, AllAttacks, Attack_by_type
+from resources.pokemons import Pokemon
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'

@@ -8,7 +8,9 @@ class AttackModel(db.Model):
     damage = db.Column(db.Integer)
 
     type_id = db.Column(db.Integer, db.ForeignKey('types_model.type_id'))
-    #terá uma ou duas informações que sairão daqui para a tabela pokemon
+
+    #attack_pokemon = db.relationship("PokemonModel", lazy="dynamic")
+
 
     def __init__(self, attack_id, attack_name, damage, type_id):
         self.attack_id = attack_id
