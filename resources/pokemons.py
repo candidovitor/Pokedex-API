@@ -55,23 +55,26 @@ class Pokemon(Resource):
                 fast_attack = pokemon['fast_attack']
                 charger_attack = pokemon['charger_attack']
 
-                """ results_type = db.session.query(TypesModel, PokemonModel).join(PokemonModel).filter_by(type_id=type_id)
+                results_type = db.session.query(TypesModel, PokemonModel).join(PokemonModel).filter_by(type_id=type_id)
                 for typ,poke in results_type:
-                    #print(f' i = {typ.type_name}')
                     pokemon.pop('type_id', None)
                     pokemon ['type_name'] = typ.type_name
 
 
                 results_region = db.session.query(RegionModel, PokemonModel).join(PokemonModel).filter_by(region_id=region_id)
                 for reg,poke in results_region:
-                    #print(f' r = {reg.region_name} ')
                     pokemon.pop('region_id', None)
-                    pokemon['region_name'] = reg.region_name """
+                    pokemon['region_name'] = reg.region_name
                 
-                results_fast_attack = db.session.query(FastAttackModel, PokemonModel).join(PokemonModel).filter_by(fast_attack_id=fast_attack_id)
-                print(fast_attack_id)
-                """ for att,poke in results_fast_attack:
-                    print(att.fast_attack_name) """
+                results_fast_attack = db.session.query(FastAttackModel, PokemonModel).join(PokemonModel).filter_by(fast_attack=fast_attack)
+                for att,poke in results_fast_attack:
+                    pokemon.pop('fast_attack', None)
+                    pokemon['fast_attack_name'] = att.fast_attack_name
+
+                results_charger_attack = db.session.query(ChargerAttackModel, PokemonModel).join(PokemonModel).filter_by(charger_attack=charger_attack)
+                for att,poke in results_charger_attack:
+                    pokemon.pop('charger_attack', None)
+                    pokemon['charger_attack_name'] = att.charger_attack_name
 
                 return pokemon
         except:
@@ -113,6 +116,32 @@ class Pokemon(Resource):
         except:
             return {'messege':'An internal error acourred'}, 500
 
+class AllPokemons(Resource):
+    def get(self):
+        try:
+            return {"pokemon": [pokemon.json() for pokemon in PokemonModel.find_all()]}
+        except:
+            return {'message': 'Could not find pokemon or internal error'}
 
-    
+class Pokemon_by_type(Resource):
+    def get(self, type_id):
+        #print(type_id)
+        try:
+            pokemon = PokemonModel.query.filter_by(type_id=type_id)
+
+            poke_type = TypesModel.find_by_id(type_id)
+            poke_type = poke_type.json()
+
+            type_name = poke_type['type_name']
+
+            poke_type = PokemonModel.query.filter_by(type_id=type_id)
+            print(poke_type)
+            
+            return {f'Pokemon by type {type_name}': [x.json() for x in pokemon]}
+        except:
+            return {'messege':'An internal error acourred'}, 500
+        
+
+
+
 

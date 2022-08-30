@@ -54,9 +54,10 @@ class PokemonModel(db.Model):
             self.charger_attack = charger_attack
             self.hit_point = hit_point
         
-
     @classmethod
     def find_by_id(cls, number_id):
         return cls.query.filter_by(number_id=number_id).first()
 
-    
+    @classmethod
+    def find_all(cls):
+        return cls.query.all()
