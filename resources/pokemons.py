@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
 from models.pokemons import PokemonModel
-from models.attacks import AttackModel
+from models.fast_attacks import FastAttackModel
+from models.charger_attacks import ChargerAttackModel
 from models.types import TypesModel
 from models.regions import RegionModel
 
@@ -13,8 +14,8 @@ class Pokemon(Resource):
     parser.add_argument('evolution', type=str, required=True)
     parser.add_argument('type_id', type=int, required=True)
     parser.add_argument('region_id', type=int, required=True)
-    parser.add_argument('attack_id_1', type=int, required=True)
-    parser.add_argument('attack_id_2', type=int, required=True)
+    parser.add_argument('fast_attack', type=int, required=True)
+    parser.add_argument('charger_attack', type=int, required=True)
     parser.add_argument('hit_point', type=int, required=True)
 
     def post(self, number_id):

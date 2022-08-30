@@ -6,7 +6,7 @@ class RegionModel(db.Model):
     region_id = db.Column(db.Integer, primary_key=True)
     region_name = db.Column(db.String(20))
 
-    region_pokemon = db.relationship("PokemonModel", lazy="dynamic")
+    #region_pokemon = db.relationship("PokemonModel", lazy="dynamic")
     
     def __init__(self, region_id, region_name):
         self.region_id = region_id

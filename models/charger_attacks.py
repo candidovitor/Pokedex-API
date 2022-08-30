@@ -1,27 +1,26 @@
 from database import db
 
-class AttackModel(db.Model):
-    __tabelaname__ = 'attacks'
+class ChargerAttackModel(db.Model):
+    __tabelaname__ = 'charger_attacks'
 
-    attack_id = db.Column(db.Integer, primary_key=True)
-    attack_name = db.Column(db.String(50))
+    charger_attack_id = db.Column(db.Integer, primary_key=True)
+    charger_attack_name = db.Column(db.String(50))
     damage = db.Column(db.Integer)
 
     type_id = db.Column(db.Integer, db.ForeignKey('types_model.type_id'))
 
-    attack_pokemon_1 = db.relationship("PokemonModel")
-    attack_pokemon_2 = db.relationship("PokemonModel")
+    charger_attack_pokemon = db.relationship("PokemonModel")
 
-    def __init__(self, attack_id, attack_name, damage, type_id):
-        self.attack_id = attack_id
-        self.attack_name = attack_name
+    def __init__(self, fast_attack_id, fast_attack_name, damage, type_id):
+        self.fast_attack_id = fast_attack_id
+        self.fast_attack_name = fast_attack_name
         self.damage = damage
         self.type_id = type_id
 
     def json(self):
         return {
-            'attack_id': self.attack_id,
-            'attack_name': self.attack_name,
+            'fast_attack_id': self.fast_attack_id,
+            'fast_attack_name': self.fast_attack_name,
             'damage': self.damage,
             'type_id': self.type_id
         }
@@ -46,6 +45,3 @@ class AttackModel(db.Model):
     @classmethod
     def find_all_attacks(cls):
         return cls.query.all()
-
-    
-        

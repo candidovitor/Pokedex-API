@@ -1,17 +1,17 @@
 from flask_restful import Resource, reqparse
-from models.attacks import AttackModel
+from models.fast_attacks import FastAttackModel
 from models.types import TypesModel
 
 from database import db
 
-class AllAttacks(Resource):
+class All_FAst_Attacks(Resource):
     def get(self):
-        return {"attacks": [attacks.json() for attacks in AttackModel.find_all_attacks()]}
+        return {"fast_attacks": [attacks.json() for attacks in FastAttackModel.find_all_attacks()]}
 
 class Attack(Resource):
     parser = reqparse.RequestParser()
     #parser.add_argument('attack_id', type=int, required=True, help="This field cannot be left blank")
-    parser.add_argument('attack_name', type=str, required=True)
+    parser.add_argument('fast_attack_name', type=str, required=True)
     parser.add_argument('damage', type=int, required=True)
     parser.add_argument('type_id', type=float, required=True)
     
@@ -25,11 +25,11 @@ class Attack(Resource):
         try:
             data = Attack.parser.parse_args()
             
-            attack_name = data['attack_name']
+            fast_attack_name = data['fast_attack_name']
             damage = data['damage']
             type_id = data['type_id']
 
-            attack = AttackModel(attack_id, attack_name, damage, type_id)
+            attack = FastAttackModel(fast_attack_id, fast_attack_name, damage, type_id)
 
             attack.save_to_db()
         except:
@@ -39,7 +39,7 @@ class Attack(Resource):
 
     def delete(self, attack_id):
         try:
-            attack = AttackModel.find_attack_by_id(attack_id)
+            attack = FastAttackModel.find_attack_by_id(attack_id)
             if attack:
                 attack.delete_attack()
                 return {"Message": "Attack deleted"}, 200

@@ -9,20 +9,20 @@ class PokemonModel(db.Model):
 
     type_id = db.Column(db.Integer, db.ForeignKey('types_model.type_id')) 
     region_id = db.Column(db.Integer, db.ForeignKey('region_model.region_id'))
-    attack_id_1 = db.Column(db.Integer, db.ForeignKey('attack_model.attack_id'))
-    #attack_id_2 = db.Column(db.Integer, db.ForeignKey('attack_model.attack_id'))
+    fast_attack = db.Column(db.Integer, db.ForeignKey('fast_attack_model.attack_id'))
+    charger_attack = db.Column(db.Integer, db.ForeignKey('charger_attack_model.attack_id'))
 
     hit_point = db.Column(db.Integer)
 
-    def __init__(self, number_id, name, evolution, type_id, region_id, attack_id_1, hit_point):
+    def __init__(self, number_id, name, evolution, type_id, region_id, fast_attack, charger_attack,hit_point):
 
         self.number_id = number_id
         self.name = name
         self.evolution = evolution
         self.type_id = type_id
         self.region_id = region_id
-        self.attack_id_1 = attack_id_1
-        #self.attack_id_2 = attack_id_2
+        self.fast_attack = fast_attack
+        self.charger_attack = charger_attack
         self.hit_point = hit_point
 
     def json(self):
@@ -32,8 +32,8 @@ class PokemonModel(db.Model):
             'evolution': self.evolution,
             'type_id': self.type_id,
             'region_id': self.region_id,
-            'attack_id_1': self.attack_id_1,
-            #'attack_id_2': self.attack_id_2,
+            'fast_attack': self.fast_attack,
+            'charger_attack': self.charger_attack,
             'hit_point': self.hit_point
         }
 
