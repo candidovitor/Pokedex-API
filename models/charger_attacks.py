@@ -9,18 +9,18 @@ class ChargerAttackModel(db.Model):
 
     type_id = db.Column(db.Integer, db.ForeignKey('types_model.type_id'))
 
-    charger_attack_pokemon = db.relationship("PokemonModel")
+    #charger_attack_pokemon = db.relationship("PokemonModel")
 
-    def __init__(self, fast_attack_id, fast_attack_name, damage, type_id):
-        self.fast_attack_id = fast_attack_id
-        self.fast_attack_name = fast_attack_name
+    def __init__(self, charger_attack_id, charger_attack_name, damage, type_id):
+        self.charger_attack_id = charger_attack_id
+        self.charger_attack_name = charger_attack_name
         self.damage = damage
         self.type_id = type_id
 
     def json(self):
         return {
-            'fast_attack_id': self.fast_attack_id,
-            'fast_attack_name': self.fast_attack_name,
+            'charger_attack_id': self.charger_attack_id,
+            'charger_attack_name': self.charger_attack_name,
             'damage': self.damage,
             'type_id': self.type_id
         }
@@ -33,14 +33,14 @@ class ChargerAttackModel(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    def update_attack(self, attack_name, damage, type_id):
-        self.attack_name = attack_name
+    def update_attack(self, charger_attack_name, damage, type_id):
+        self.charger_attack_name = charger_attack_name
         self.damage = damage
         self.type_id = type_id
 
     @classmethod
-    def find_by_id(cls, attack_id):
-        return cls.query.filter_by(attack_id=attack_id).first()
+    def find_by_id(cls, charger_attack_id):
+        return cls.query.filter_by(charger_attack_id=charger_attack_id).first()
 
     @classmethod
     def find_all_attacks(cls):

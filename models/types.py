@@ -6,8 +6,8 @@ class TypesModel(db.Model):
     type_id = db.Column(db.Integer, primary_key=True)
     type_name = db.Column(db.String(20))
 
-    #type_fast_attack = db.relationship("FastAttackModel", lazy="dynamic") 
-    #type_charger_attack = db.relationship("ChargerAttackModel", lazy="dynamic")
+    type_fast_attack = db.relationship("FastAttackModel", lazy="dynamic") 
+    type_charger_attack = db.relationship("ChargerAttackModel", lazy="dynamic")
 
     #type_pokemon = db.relationship("PokemonModel", lazy="dynamic")
 

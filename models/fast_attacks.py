@@ -33,14 +33,14 @@ class FastAttackModel(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    def update_attack(self, attack_name, damage, type_id):
-        self.attack_name = attack_name
+    def update_attack(self, fast_attack_name, damage, type_id):
+        self.fast_attack_name = fast_attack_name
         self.damage = damage
         self.type_id = type_id
 
     @classmethod
-    def find_by_id(cls, attack_id):
-        return cls.query.filter_by(attack_id=attack_id).first()
+    def find_by_id(cls, fast_attack_id):
+        return cls.query.filter_by(fast_attack_id=fast_attack_id).first()
 
     @classmethod
     def find_all_attacks(cls):
