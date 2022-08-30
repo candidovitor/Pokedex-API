@@ -1,4 +1,15 @@
 {
+    "number_id": 1,
+    "name": "Bulbasaur",
+    "evolution": "Yes",
+    "fast_attack": 2,
+    "charger_attack": 3,
+    "hit_point": 45,
+    "type_name": "Grass",
+    "region_name": "Kanto"
+}
+
+{
     "name": "Bulbasaur",
     "evolution": "True",
     "type_id": 4,

@@ -9,7 +9,7 @@ class TypesModel(db.Model):
     type_fast_attack = db.relationship("FastAttackModel", lazy="dynamic") 
     type_charger_attack = db.relationship("ChargerAttackModel", lazy="dynamic")
 
-    #type_pokemon = db.relationship("PokemonModel", lazy="dynamic")
+    type_pokemon = db.relationship("PokemonModel", lazy="dynamic")
 
     
     def __init__(self, type_id, type_name):

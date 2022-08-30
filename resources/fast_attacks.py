@@ -17,23 +17,23 @@ class FastAttack(Resource):
     
 
     def post(self, fast_attack_id):
-        print(fast_attack_id)
-        """ attack = FastAttackModel.find_by_id(fast_attack_id)
+        #print(fast_attack_id)
+        attack = FastAttackModel.find_by_id(fast_attack_id)
         if attack:
-            return {"Message": "Id already in use"}, 404 """
+            return {"Message": "Id already in use"}, 404
 
-        #try:
-        data = FastAttack.parser.parse_args()
-        
-        fast_attack_name = data['fast_attack_name']
-        damage = data['damage']
-        type_id = data['type_id']
+        try:
+            data = FastAttack.parser.parse_args()
+            
+            fast_attack_name = data['fast_attack_name']
+            damage = data['damage']
+            type_id = data['type_id']
 
-        attack = FastAttackModel(fast_attack_id, fast_attack_name, damage, type_id)
+            attack = FastAttackModel(fast_attack_id, fast_attack_name, damage, type_id)
 
-        attack.save_to_db()
-        #except:
-            #return {"Message": "Internal error accoured"}, 500
+            attack.save_to_db()
+        except:
+            return {"Message": "Internal error accoured"}, 500
         
         return attack.json()
 

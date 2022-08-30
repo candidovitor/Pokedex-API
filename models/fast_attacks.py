@@ -9,7 +9,7 @@ class FastAttackModel(db.Model):
 
     type_id = db.Column(db.Integer, db.ForeignKey('types_model.type_id'))
 
-    #fast_attack_pokemon = db.relationship("PokemonModel")
+    fast_attack_pokemon = db.relationship("PokemonModel")
 
     def __init__(self, fast_attack_id, fast_attack_name, damage, type_id):
         self.fast_attack_id = fast_attack_id

@@ -32,11 +32,11 @@ class Pokemon(Resource):
 
                 type_id = data['type_id']
                 region_id = data['region_id']
-                attack_id_1 = data['attack_id_1']
-                attack_id_2 = data['attack_id_2']
+                fast_attack = data['fast_attack']
+                charger_attack = data['charger_attack']
                 hit_point = data['hit_point']
 
-                pokemon = PokemonModel(number_id, name, evolution, type_id, region_id, attack_id_1, attack_id_2, hit_point)
+                pokemon = PokemonModel(number_id, name, evolution, type_id, region_id, fast_attack, charger_attack, hit_point)
 
                 pokemon.save_to_db()
                 return pokemon.json()
@@ -44,30 +44,40 @@ class Pokemon(Resource):
             return {'Message':'An error occurred while adding pokemon'}, 500
     
     def get(self, number_id):
-        
-        pokemon = PokemonModel.find_by_id(number_id)
+        try:
+            pokemon = PokemonModel.find_by_id(number_id)
 
-        if pokemon:
-            pokemon = pokemon.json()
-            type_id = pokemon['type_id']
-            print(type_id)
-            results_type = db.session.query(TypesModel, PokemonModel).join(PokemonModel).filter_by(type_id=type_id)
-            for typ,poke in results_type:
-                #print(f' i = {typ.type_name}')
-                pokemon.pop('type_id', None)
-                pokemon ['type_name'] = typ.type_name
+            if pokemon:
+                pokemon = pokemon.json()
+
+                type_id = pokemon['type_id']
+                region_id = pokemon['region_id']
+                fast_attack = pokemon['fast_attack']
+                charger_attack = pokemon['charger_attack']
+
+                """ results_type = db.session.query(TypesModel, PokemonModel).join(PokemonModel).filter_by(type_id=type_id)
+                for typ,poke in results_type:
+                    #print(f' i = {typ.type_name}')
+                    pokemon.pop('type_id', None)
+                    pokemon ['type_name'] = typ.type_name
 
 
-            print(results_type)
-            #type_dict = []
+                results_region = db.session.query(RegionModel, PokemonModel).join(PokemonModel).filter_by(region_id=region_id)
+                for reg,poke in results_region:
+                    #print(f' r = {reg.region_name} ')
+                    pokemon.pop('region_id', None)
+                    pokemon['region_name'] = reg.region_name """
+                
+                results_fast_attack = db.session.query(FastAttackModel, PokemonModel).join(PokemonModel).filter_by(fast_attack_id=fast_attack_id)
+                print(fast_attack_id)
+                """ for att,poke in results_fast_attack:
+                    print(att.fast_attack_name) """
 
+                return pokemon
+        except:
+            return {'Message':'An error occurred'}, 500     
 
-            return pokemon
-        else:
-            return {'Message':'Pokemon number not found in pokedex'}, 404 
-        
-        
-
+    
     def delete(self, number_id):
         try:
             pokemon = PokemonModel.find_by_id(number_id)
