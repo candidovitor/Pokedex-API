@@ -8,7 +8,7 @@ class TypesModel(db.Model):
 
     type_attack = db.relationship("AttackModel", lazy="dynamic") 
 
-    #type_pokemon = db.relationship("PokemonModel", lazy="dynamic")
+    type_pokemon = db.relationship("PokemonModel", lazy="dynamic")
 
     
     def __init__(self, type_id, type_name):

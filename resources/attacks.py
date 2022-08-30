@@ -74,13 +74,13 @@ class Attack(Resource):
 
 class Attack_by_type(Resource):
     def get(self, type_id):
-        #print(type_id)
+        print(type_id)
         try:
             attacks = AttackModel.query.filter_by(type_id=type_id)
             
             type_attack = TypesModel.find_by_id(type_id)
             type_attack = type_attack.json()
-            #print(type_attack)
+            print(type_attack)
             type_name = type_attack['type_name']
 
             type_attack = AttackModel.query.filter_by(type_id=type_id).first()

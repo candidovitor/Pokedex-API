@@ -1,11 +1,9 @@
-""" types = TypesModel.find_by_id(type_id)
-        types = types.json()
-        type_id = types['type_id']
-
-        return {type_id: [x.json() for x in attacks]}"""
-
 {
-    "attack_name": "Attack bite of the dragon",
-    "damage": 8000,
-    "type_id": 20
+    "name": "Bulbasaur",
+    "evolution": "True",
+    "type_id": 4,
+    "region_id": 1,
+    "attack_id_1": 7,
+    "attack_id_2": 8,
+    "hit_point": 45
 }

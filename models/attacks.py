@@ -9,8 +9,8 @@ class AttackModel(db.Model):
 
     type_id = db.Column(db.Integer, db.ForeignKey('types_model.type_id'))
 
-    #attack_pokemon = db.relationship("PokemonModel", lazy="dynamic")
-
+    attack_pokemon_1 = db.relationship("PokemonModel")
+    attack_pokemon_2 = db.relationship("PokemonModel")
 
     def __init__(self, attack_id, attack_name, damage, type_id):
         self.attack_id = attack_id
